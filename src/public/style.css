@@ -1,0 +1,24 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 1.4rem;
+    color: #C9D1D9;
+}
+body{
+    background-color: #0D1117;
+}
+.container-chat{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: #1f2631;
+}
+input{
+    background-color: #C9D1D9;
+    color: #0D1117;
+}
+.btn{
+    color: #0D1117;
+}
