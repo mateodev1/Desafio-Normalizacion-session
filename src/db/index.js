@@ -1,5 +1,5 @@
-const { default:chatDAO } = await import("./DAO/chatDAO.js")
+const { default: chatDAO } = await import("./DAO/chatDAO.js");
 
-const chatDB = new chatDAO()
+const chatDB = new chatDAO();
 
-export default {chatDB}
+export default { chatDB };
