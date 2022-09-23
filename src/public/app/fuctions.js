@@ -1,5 +1,11 @@
 import { container,message,email,name,lastName,age,alias,avatar,divChat } from './selectors.js'
 import { socket } from './index.js';
+
+const authorSchema = new normalizr.schema.Entity('author', {}, { idAttribute: 'email' });
+const mensajeSchema = new normalizr.schema.Entity('mensaje', { author: authorSchema }, { idAttribute: 'id' });
+const schemaMensajes = new normalizr.schema.Entity('mensajes', { mensajes: [mensajeSchema] }, { idAttribute: 'id' });
+
+
 export const sendMessage = (e) => {
   e.preventDefault();
   const newMessage = {
@@ -19,10 +25,17 @@ export const sendMessage = (e) => {
   return false;
 };
 
-export const renderChat = (chat) => {
+export const renderChat = (mess) => {
+  // console.log(mess);
+  const denormalizedData = normalizr.denormalize(
+    mess.result,
+    schemaMensajes,
+    mess.entities
+  );
+  console.log(denormalizedData)
   limpiarHTML(divChat);
-  chat.forEach((newMessage) => {
-    const { author, text, fecha } = newMessage;
+  denormalizedData.mensajes.forEach(item => {
+    const { author, fecha ,text } = item._doc
     const messageDiv = document.createElement("div");
     messageDiv.innerHTML = `
               <div>

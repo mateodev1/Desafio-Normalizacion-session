@@ -1,12 +1,13 @@
 import DAO from "./../db/index.js";
+import { normalizedData, compressionPercentage } from "../normalizar/index.js";
 
 const socketsEventsChat = (io) => {
   io.on("connection",  (socket) => {
 
-    const emit =async()=>{
-      const chat = await DAO.chatDB.getAll();
-      io.sockets.emit('chat',chat)
-      socket.emit('chat',chat)
+    const emit = async()=>{
+      const chat = await DAO.chatDB.getAll()
+      const newChat = normalizedData(chat)
+      io.sockets.emit('chat',newChat)
     }
 
     console.log(`New connection ID: ${socket.id}`);

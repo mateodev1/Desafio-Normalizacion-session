@@ -25,7 +25,7 @@ const PORT = app.get("port");
 const mongoConf = { useNewUrlParser: true, useUnifiedTopology: true };
 
 //STATIC FILES
-app.use("/static", express.static(__dirname + "/public"));
+app.use("/public", express.static(__dirname + "/public"));
 
 //MIDDLEWARES
 app.use(express.json());
@@ -42,9 +42,9 @@ app.use(
     resave: false,
     saveUninitialized: false,
     rolling: true,
-    cookie: {
-      maxAge: 10000,
-    },
+    // cookie: {
+    //   maxAge: 10000,
+    // },
   })
 );
 
